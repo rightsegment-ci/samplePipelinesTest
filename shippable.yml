@@ -1,38 +1,59 @@
 # Language setting
-language: node_js
+language: scala
 
 # Version number
-node_js:
-  - 6.1
+jdk:
+  - oraclejdk8
 
 branches:
   only:
     - master
     - ci-test/*
 
-env:
-  - IMAGE_NAME=asia.gcr.io/cyberagent-037/fukao/shippable
-
 build:
+  pre_ci_boot:
+    image_name: asia.gcr.io/cyberagent-037/api/build
+    image_tag: latest
+    pull: true
+
   pre_ci:
-    - pwd; ls
 
   ci:
-#    - sudo docker build -t $IMAGE_NAME:$BRANCH.$BUILD_NUMBER .
-     - pwd; ls
+    - docker login -e 1234@5678.com -u oauth2accesstoken -p `gcloud auth print-access-token` https://asia.gcr.io
+    - pwd;ls
+    - echo "BASE_BRANCH:$BASE_BRANCH"
+    - echo "BRANCH:$BRANCH"
+    - echo "BUILD_NUMBER:$BUILD_NUMBER"
+    - echo "BUILD_URL:$BUILD_URL"
+    - echo "COMMIT_MESSAGE:$COMMIT_MESSAGE"
+    - echo "COMPARE_URL:$COMPARE_URL"
+    - echo "HEAD_BRANCH:$HEAD_BRANCH"
+    - echo "IS_PULL_REQUEST:$IS_PULL_REQUEST"
+    - echo "JOB_ID:$JOB_ID"
+    - echo "JOB_NUMBER:$JOB_NUMBER"
+    - echo ""
+    - echo ""
+    - echo ""
+    - echo ""
+    - echo ""
+    - echo ""
+    - echo ""
+    - echo ""
+    - echo ""
+    - echo ""
 
   post_ci:
-    - pwd; ls
     - docker images
 
   push:
-    - pwd; ls
-    - echo $IMAGE_NAME:$BRANCH.$BUILD_NUMBER
-#    - sudo docker push $IMAGE_NAME:$BRANCH.$BUILD_NUMBER
-    - gcloud version
-#    - gcloud components install kubectl
-#    - gcloud components list
-#    - kubectl version
+#    - REPO=asia.gcr.io/cyberagent-037/api/halberd-app
+#    - TAG=`docker images --format "{{.ID}}\t{{.CreatedAt}}\t{{.Tag}}" $REPO | sort -r -k2,3 | awk -F"\t" '$3 != "latest" {print $3}' | head -n 1`
+#    - echo ${REPO}:${TAG}
+#    - docker push ${REPO}:${TAG}
+#    - docker images
+#    - ls -a
+#    - pwd
+#    - make api-push
 
   cache: true
 
