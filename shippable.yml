@@ -1,0 +1,45 @@
+# Language setting
+language: node_js
+
+# Version number
+node_js:
+  - 6.1
+
+branches:
+  only:
+    - master
+    - ci-test/*
+
+env:
+  - IMAGE_NAME=asia.gcr.io/cyberagent-037/fukao/shippable
+
+build:
+  pre_ci:
+    - pwd; ls
+
+  ci:
+#    - sudo docker build -t $IMAGE_NAME:$BRANCH.$BUILD_NUMBER .
+
+  post_ci:
+    - pwd; ls
+    - docker images
+
+  push:
+    - pwd; ls
+    - echo $IMAGE_NAME:$BRANCH.$BUILD_NUMBER
+#    - sudo docker push $IMAGE_NAME:$BRANCH.$BUILD_NUMBER
+    - gcloud version
+#    - gcloud components install kubectl
+    - gcloud components list
+#    - kubectl version
+
+  cache: true
+
+  cache_dir_list: 
+    - $SHIPPABLE_BUILD_DIR/node_modules
+
+integrations:
+  hub:
+    - integrationName: gcr-stage
+      type: gcr
+      agent_only: true

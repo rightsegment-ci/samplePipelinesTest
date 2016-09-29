@@ -1,5 +1,0 @@
-triggers:
-  - name: dv-trigger
-    type: trigger
-    version:
-      counter: 3
