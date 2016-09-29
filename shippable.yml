@@ -19,6 +19,7 @@ build:
 
   ci:
 #    - sudo docker build -t $IMAGE_NAME:$BRANCH.$BUILD_NUMBER .
+     - pwd; ls
 
   post_ci:
     - pwd; ls
@@ -30,7 +31,7 @@ build:
 #    - sudo docker push $IMAGE_NAME:$BRANCH.$BUILD_NUMBER
     - gcloud version
 #    - gcloud components install kubectl
-    - gcloud components list
+#    - gcloud components list
 #    - kubectl version
 
   cache: true
