@@ -9,6 +9,7 @@ branches:
   only:
     - master
     - ci-test/*
+    - dev/*
 
 build:
   pre_ci_boot:
