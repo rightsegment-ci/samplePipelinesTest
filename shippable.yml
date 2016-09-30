@@ -43,6 +43,7 @@ build:
     - echo "RELEASE_NAME:$RELEASE_NAME"
     - |
      echo hoge
+     echo test
 
   post_ci:
     - docker images
