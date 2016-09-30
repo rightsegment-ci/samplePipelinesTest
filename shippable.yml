@@ -42,8 +42,11 @@ build:
     - echo "RELEASED_AT:$RELEASED_AT"
     - echo "RELEASE_NAME:$RELEASE_NAME"
     - |
-     echo hoge
-     echo test
+      if [[ "$IS_GIT_TAG" == "true" ]]; then 
+        echo "TAG trigger"
+      else
+        echo "OTHER"
+      fi
 
   post_ci:
     - docker images
