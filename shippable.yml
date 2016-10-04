@@ -20,6 +20,7 @@ build:
   pre_ci:
 
   ci:
+    - gcloud auth activate-service-account --key-file /root/.stage-key.json
     - docker login -e 1234@5678.com -u oauth2accesstoken -p `gcloud auth print-access-token` https://asia.gcr.io
     - pwd;ls
     - echo "BASE_BRANCH:$BASE_BRANCH"
