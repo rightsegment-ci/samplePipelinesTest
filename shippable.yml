@@ -43,7 +43,9 @@ build:
     - echo "RELEASED_AT:$RELEASED_AT"
     - echo "RELEASE_NAME:$RELEASE_NAME"
     - |
-      if [ "$IS_PULL_REQUEST" = "false" -a "$ORG_NAME" = "CyberAgent" ]; then
+      if [ "$IS_PULL_REQUEST" = "false" \
+         -a "$ORG_NAME" = "CyberAgent" \
+         -a "$BASE_BRANCH" = "master" ]; then
         echo "TAG trigger"
       else
         echo "OTHER"
